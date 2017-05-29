@@ -28,7 +28,7 @@ private:
    Handler m_handler;
 };
 
-class QmgObjectPropertyColumnModelDecorator : public QIdentityProxyModel
+class QMODERNGRIDS_LIBRARY_API QmgObjectPropertyColumnModelDecorator : public QIdentityProxyModel
 {
 public:
    typedef std::function<QVariant(const QModelIndex &)> Handler;
