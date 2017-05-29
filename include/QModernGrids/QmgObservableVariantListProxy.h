@@ -84,11 +84,11 @@ public:
    template <class T>
    static QmgObservableVariantListProxy from(QmgObservableList<T> &list)
    {
-      return fromComperator(list, std::equal_to<T>());
+      return from(list, std::equal_to<T>());
    }
 
    template <class T, class Comperator>
-   static QmgObservableVariantListProxy fromComperator(QmgObservableList<T> &list, Comperator comperator)
+   static QmgObservableVariantListProxy from(QmgObservableList<T> &list, Comperator comperator)
    {
       QmgObservableVariantListProxy result;
 
