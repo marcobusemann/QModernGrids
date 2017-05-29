@@ -94,7 +94,7 @@ QmgColumnBasedDataModelDecorator::QmgColumnBasedDataModelDecorator(int column, c
 QVariant QmgColumnBasedDataModelDecorator::data(const QModelIndex &index, int role) const
 {
    return index.column() == m_column ?
-      __super::data(index, role) :
+      QIdentityProxyModel::data(index, role) :
       QIdentityProxyModel::data(index, role);
 }
 
@@ -119,7 +119,7 @@ QmgRoleBasedDataModelDecorator::QmgRoleBasedDataModelDecorator(int role, RawRole
 QVariant QmgRoleBasedDataModelDecorator::data(const QModelIndex &index, int role) const
 {
    return role == m_role ?
-      __super::data(index, role) :
+      QIdentityProxyModel::data(index, role) :
       QIdentityProxyModel::data(index, role);
 }
 
@@ -147,6 +147,6 @@ QmgColumnAndRoleBasedDataModelDecorator::QmgColumnAndRoleBasedDataModelDecorator
 QVariant QmgColumnAndRoleBasedDataModelDecorator::data(const QModelIndex &index, int role) const
 {
    return index.column() == m_column && role == m_role ?
-      __super::data(index, role) :
+      QIdentityProxyModel::data(index, role) :
       QIdentityProxyModel::data(index, role);
 }

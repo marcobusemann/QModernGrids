@@ -16,7 +16,7 @@ QmgHeaderDataModelDecorator::QmgHeaderDataModelDecorator(Qt::Orientation orienta
 
 QVariant QmgHeaderDataModelDecorator::headerData(int section, Qt::Orientation orientation, int role) const
 {
-   if (orientation != m_orientation) return __super::headerData(section, orientation, role);
+   if (orientation != m_orientation) return QIdentityProxyModel::headerData(section, orientation, role);
    return
       m_handler != nullptr ? m_handler(section, role) :
       m_rawHandler(section, role, [this, section, orientation, role]() -> QVariant { return QIdentityProxyModel::headerData(section, orientation, role); });
@@ -37,7 +37,7 @@ QmgSectionBasedHeaderDataModelDecorator::QmgSectionBasedHeaderDataModelDecorator
 QVariant QmgSectionBasedHeaderDataModelDecorator::headerData(int section, Qt::Orientation orientation, int role) const
 {
    return m_section == section ?
-      __super::headerData(section, orientation, role) :
+      QIdentityProxyModel::headerData(section, orientation, role) :
       QIdentityProxyModel::headerData(section, orientation, role);
 }
 
@@ -56,7 +56,7 @@ QmgRoleBasedHeaderDataModelDecorator::QmgRoleBasedHeaderDataModelDecorator(int r
 QVariant QmgRoleBasedHeaderDataModelDecorator::headerData(int section, Qt::Orientation orientation, int role) const
 {
    return m_role == role ?
-      __super::headerData(section, orientation, role) :
+      QIdentityProxyModel::headerData(section, orientation, role) :
       QIdentityProxyModel::headerData(section, orientation, role);
 }
 
@@ -77,6 +77,6 @@ QmgSectionAndRoleBasedHeaderDataModelDecorator::QmgSectionAndRoleBasedHeaderData
 QVariant QmgSectionAndRoleBasedHeaderDataModelDecorator::headerData(int section, Qt::Orientation orientation, int role) const
 {
    return m_role == role && m_section == section ?
-      __super::headerData(section, orientation, role) :
+      QIdentityProxyModel::headerData(section, orientation, role) :
       QIdentityProxyModel::headerData(section, orientation, role);
 }
