@@ -16,6 +16,10 @@ template <class T>
 class QmgObservableList final
 {
 public:
+   using iterator = typename QList<T>::iterator;
+   using const_iterator = typename QList<T>::const_iterator;
+
+public:
     static QmgObservableList<T> empty() { return QmgObservableList<T>(); }
     static QmgObservableList<T> fromList(const QList<T> &items) { return QmgObservableList<T>(items); }
     static QmgObservableList<T> fromList(const QmgObservableList<T> &items) { return QmgObservableList<T>(items); }
@@ -46,6 +50,26 @@ public:
     const T &at(int index) const
     { 
         return m_items.at(index); 
+    }
+
+    iterator begin()
+    {
+       return m_items.begin();
+    }
+
+    const_iterator begin() const
+    {
+       return m_items.constBegin();
+    }
+
+    iterator end()
+    {
+       return m_items.end();
+    }
+
+    const_iterator end() const
+    {
+       return m_items.constEnd();
     }
 
     void append(const T &item)
