@@ -74,6 +74,38 @@ QModelIndexList QmgObservableVariantListModel::match(const QModelIndex &start, i
    return result;
 }
 
+bool QmgObservableVariantListModel::insertRows(int row, int count, const QModelIndex &parent)
+{
+   if (parent.isValid())
+      return false;
+
+   for (auto i = 0; i < count; i++)
+      m_source.insert(row, QVariant());
+
+   return true;
+}
+
+bool QmgObservableVariantListModel::setData(const QModelIndex &index, const QVariant &value, int role)
+{
+   if (!index.isValid() || role != Qt::UserRole)
+      return false;
+
+   m_source.update(index.row(), value);
+   
+   return true;
+}
+
+bool QmgObservableVariantListModel::removeRows(int row, int count, const QModelIndex &parent)
+{
+   if (parent.isValid())
+      return false;
+
+   for (auto i = count - 1; i >= 0; i--)
+      m_source.removeAt(row + i);
+
+   return true;
+}
+
 void QmgObservableVariantListModel::linkTo(QmgObservableVariantListProxy &source)
 {
    m_addBeforeScope = source.beforeAdd().attach([this](int index, const QVariant &) -> void

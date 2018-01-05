@@ -68,7 +68,7 @@ public:
    template <class T>
    static QmgObservableVariantListProxy from(QmgObservableList<std::shared_ptr<T>> &list)
    {
-      return from<std::shared_ptr<T>>(list[](const std::shared_ptr<T> &a, const std::shared_ptr<T> &b) {
+      return from<std::shared_ptr<T>>(list, [](const std::shared_ptr<T> &a, const std::shared_ptr<T> &b) {
          return a != nullptr && b != nullptr && *a == *b;
       });
    }
