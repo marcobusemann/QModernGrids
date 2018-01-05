@@ -36,6 +36,13 @@ public:
         return *this;
     }
 
+    QmgObservableList<T> &operator=(const QList<T> &rhs)
+    {
+       clear();
+       append(rhs);
+       return *this;
+    }
+
     bool operator==(const QmgObservableList<T> &rhs)
     {
         return m_items == rhs.m_items;
