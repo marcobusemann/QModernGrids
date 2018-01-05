@@ -64,6 +64,11 @@ QmgCommonModelBuilder &QmgCommonModelBuilder::withSortAndFilter(std::function<vo
    return embeddNewModel(sortFilterModel);
 }
 
+QmgCommonModelBuilder &QmgCommonModelBuilder::withSortAndFilter(QSortFilterProxyModel* sortFilterModel)
+{
+   return embeddNewModel(sortFilterModel);
+}
+
 QAbstractProxyModel *QmgCommonModelBuilder::build()
 {
    auto result = new QIdentityProxyModel(m_parent);

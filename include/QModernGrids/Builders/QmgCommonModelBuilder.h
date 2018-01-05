@@ -42,6 +42,7 @@ public:
 
    QmgCommonModelBuilder &withAlternateRowShading(const QColor &colorA, const QColor &colorB);
    QmgCommonModelBuilder &withSortAndFilter(std::function<void(QSortFilterProxyModel*)> handler);
+   QmgCommonModelBuilder &withSortAndFilter(QSortFilterProxyModel* sortFilterModel);
 
    QAbstractProxyModel *build();
 
