@@ -20,6 +20,10 @@ public:
    virtual QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
    virtual QModelIndexList match(const QModelIndex &start, int role, const QVariant &value, int hits = 1, Qt::MatchFlags flags = Qt::MatchFlags(Qt::MatchStartsWith | Qt::MatchWrap)) const;
 
+   virtual bool insertRows(int row, int count, const QModelIndex &parent = QModelIndex()) override;
+   virtual bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole) override;
+   virtual bool removeRows(int row, int count, const QModelIndex &parent = QModelIndex());
+
 private:
    void linkTo(QmgObservableVariantListProxy &source);
    void unlinkFrom(QmgObservableVariantListProxy &source);
