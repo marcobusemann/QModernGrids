@@ -30,6 +30,16 @@ public:
    QmgColumnModelBuilder &withConstData(int role, const QVariant &value);
 
    template <class T>
+   QmgColumnModelBuilder &withData(int role, std::function<QVariant(const T &item)> mapHandler)
+   {
+      return withData(role, [mapHandler](const QModelIndex &index) -> QVariant
+      {
+         auto rawItem = index.data(Qt::UserRole);
+         return mapHandler(rawItem.value<T>());
+      });
+   }
+
+   template <class T>
    QmgColumnModelBuilder &withModel() {
       auto parent = this->getParent();
       m_factories.append([parent](int column) {
