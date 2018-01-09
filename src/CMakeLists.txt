@@ -13,6 +13,7 @@ set(source-decorators
 	${header_path}/Decorators/QmgHeaderdataModelDecorator.h
 	${header_path}/Decorators/QmgFetchmoreDecorator.h
 	${header_path}/Decorators/QmgDataModelDecorator.h
+	${header_path}/Decorators/QmgSetDataModelDecorator.h
 	${header_path}/Decorators/QmgColumnModelDecorator.h
 	${header_path}/Decorators/QmgCheckboxMultimarkModelDecorator.h
 	${header_path}/Decorators/QmgAlternateRowshadingModelDecorator.h
@@ -20,6 +21,7 @@ set(source-decorators
 	Decorators/QmgHeaderdataModelDecorator.cpp
 	Decorators/QmgFetchmoreDecorator.cpp
 	Decorators/QmgDataModelDecorator.cpp
+	Decorators/QmgSetDataModelDecorator.cpp
 	Decorators/QmgColumnModelDecorator.cpp
 	Decorators/QmgCheckboxMultimarkModelDecorator.cpp
 	Decorators/QmgAlternateRowshadingModelDecorator.cpp)
