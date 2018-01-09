@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QModernGrids/Decorators/QmgHeaderdataModelDecorator.h>
+#include <QModernGrids/Decorators/QmgSetDataModelDecorator.h>
 #include <QModernGrids/Decorators/QmgDataModelDecorator.h>
 #include <QModernGrids/Decorators/QmgFetchmoreDecorator.h>
 
@@ -34,6 +35,8 @@ public:
    QmgCommonModelBuilder &withData(int role, QmgDataModelDecorator::Handler handler);
    QmgCommonModelBuilder &withData(int role, QmgDataModelDecorator::RawHandler handler);
    QmgDataModelBuilder withData();
+
+   QmgCommonModelBuilder &withSetData(int role, QmgSetDataModelDecorator::Handler handler);
 
    QmgCommonModelBuilder &withFetchMore(QmgFetchMoreModelDecorator::CanFetchMoreHandler canFetchMoreHandler, QmgFetchMoreModelDecorator::FetchMoreHandler fetchMoreHandler);
    QmgCommonModelBuilder &withHorizontalHeaderData(QmgHeaderDataModelDecorator::Handler handler);

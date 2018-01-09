@@ -5,43 +5,37 @@ QmgDataModelDecorator::QmgDataModelDecorator(Handler handler, QObject *parent)
    : QIdentityProxyModel(parent)
    , m_handler(handler)
    , m_excludeRoles(QSet<int>() << Qt::UserRole)
-{
-}
+{}
 
 QmgDataModelDecorator::QmgDataModelDecorator(RawHandler handler, QObject *parent)
    : QIdentityProxyModel(parent)
    , m_rawHandler(handler)
    , m_excludeRoles(QSet<int>() << Qt::UserRole)
-{
-}
+{}
 
 QmgDataModelDecorator::QmgDataModelDecorator(RawRoleHandler handler, QObject *parent)
    : QIdentityProxyModel(parent)
    , m_rawRoleHandler(handler)
    , m_excludeRoles(QSet<int>() << Qt::UserRole)
-{
-}
+{}
 
 QmgDataModelDecorator::QmgDataModelDecorator(const QSet<int> &roleExcludes, Handler handler, QObject *parent)
    : QIdentityProxyModel(parent)
    , m_handler(handler)
    , m_excludeRoles(roleExcludes)
-{
-}
+{}
 
 QmgDataModelDecorator::QmgDataModelDecorator(const QSet<int> &roleExcludes, RawHandler handler, QObject *parent)
    : QIdentityProxyModel(parent)
    , m_rawHandler(handler)
    , m_excludeRoles(roleExcludes)
-{
-}
+{}
 
 QmgDataModelDecorator::QmgDataModelDecorator(const QSet<int> &roleExcludes, RawRoleHandler handler, QObject *parent)
    : QIdentityProxyModel(parent)
    , m_rawRoleHandler(handler)
    , m_excludeRoles(roleExcludes)
-{
-}
+{}
 
 QVariant QmgDataModelDecorator::data(const QModelIndex &index, int role) const
 {
@@ -51,45 +45,45 @@ QVariant QmgDataModelDecorator::data(const QModelIndex &index, int role) const
       return QVariant();
    return
       m_handler != nullptr ? m_handler(mapToSource(index), role) :
-      m_rawHandler != nullptr ? m_rawHandler(mapToSource(index), role, [this, index, role]() -> QVariant { return QIdentityProxyModel::data(index, role); }) :
-      m_rawRoleHandler(mapToSource(index), role, [this, index](int role) -> QVariant { return QIdentityProxyModel::data(index, role); });
+      m_rawHandler != nullptr ? m_rawHandler(mapToSource(index), role, [this, index, role]() -> QVariant
+   {
+      return QIdentityProxyModel::data(index, role);
+   }) :
+      m_rawRoleHandler(mapToSource(index), role, [this, index](int role) -> QVariant
+   {
+      return QIdentityProxyModel::data(index, role);
+   });
 }
 
 QmgColumnBasedDataModelDecorator::QmgColumnBasedDataModelDecorator(int column, Handler handler, QObject *parent)
    : QmgDataModelDecorator(handler, parent)
    , m_column(column)
-{
-}
+{}
 
 QmgColumnBasedDataModelDecorator::QmgColumnBasedDataModelDecorator(int column, const QSet<int> &roleExcludes, Handler handler, QObject *parent)
    : QmgDataModelDecorator(roleExcludes, handler, parent)
    , m_column(column)
-{
-}
+{}
 
 QmgColumnBasedDataModelDecorator::QmgColumnBasedDataModelDecorator(int column, RawHandler handler, QObject *parent)
    : QmgDataModelDecorator(handler, parent)
    , m_column(column)
-{
-}
+{}
 
 QmgColumnBasedDataModelDecorator::QmgColumnBasedDataModelDecorator(int column, const QSet<int> &roleExcludes, RawHandler handler, QObject *parent)
    : QmgDataModelDecorator(roleExcludes, handler, parent)
    , m_column(column)
-{
-}
+{}
 
 QmgColumnBasedDataModelDecorator::QmgColumnBasedDataModelDecorator(int column, RawRoleHandler handler, QObject *parent)
    : QmgDataModelDecorator(handler, parent)
    , m_column(column)
-{
-}
+{}
 
 QmgColumnBasedDataModelDecorator::QmgColumnBasedDataModelDecorator(int column, const QSet<int> &roleExcludes, RawRoleHandler handler, QObject *parent)
    : QmgDataModelDecorator(roleExcludes, handler, parent)
    , m_column(column)
-{
-}
+{}
 
 QVariant QmgColumnBasedDataModelDecorator::data(const QModelIndex &index, int role) const
 {
@@ -101,20 +95,17 @@ QVariant QmgColumnBasedDataModelDecorator::data(const QModelIndex &index, int ro
 QmgRoleBasedDataModelDecorator::QmgRoleBasedDataModelDecorator(int role, Handler handler, QObject *parent)
    : QmgDataModelDecorator(handler, parent)
    , m_role(role)
-{
-}
+{}
 
 QmgRoleBasedDataModelDecorator::QmgRoleBasedDataModelDecorator(int role, RawHandler handler, QObject *parent)
    : QmgDataModelDecorator(handler, parent)
    , m_role(role)
-{
-}
+{}
 
 QmgRoleBasedDataModelDecorator::QmgRoleBasedDataModelDecorator(int role, RawRoleHandler handler, QObject *parent)
    : QmgDataModelDecorator(handler, parent)
    , m_role(role)
-{
-}
+{}
 
 QVariant QmgRoleBasedDataModelDecorator::data(const QModelIndex &index, int role) const
 {
@@ -127,22 +118,19 @@ QmgColumnAndRoleBasedDataModelDecorator::QmgColumnAndRoleBasedDataModelDecorator
    : QmgDataModelDecorator(handler, parent)
    , m_column(column)
    , m_role(role)
-{
-}
+{}
 
 QmgColumnAndRoleBasedDataModelDecorator::QmgColumnAndRoleBasedDataModelDecorator(int column, int role, RawHandler handler, QObject *parent)
    : QmgDataModelDecorator(handler, parent)
    , m_column(column)
    , m_role(role)
-{
-}
+{}
 
 QmgColumnAndRoleBasedDataModelDecorator::QmgColumnAndRoleBasedDataModelDecorator(int column, int role, RawRoleHandler handler, QObject *parent)
    : QmgDataModelDecorator(handler, parent)
    , m_column(column)
    , m_role(role)
-{
-}
+{}
 
 QVariant QmgColumnAndRoleBasedDataModelDecorator::data(const QModelIndex &index, int role) const
 {

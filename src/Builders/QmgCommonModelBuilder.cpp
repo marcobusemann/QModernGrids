@@ -32,6 +32,11 @@ QmgDataModelBuilder QmgCommonModelBuilder::withData()
    return QmgDataModelBuilder(m_base, m_parent);
 }
 
+QmgCommonModelBuilder &QmgCommonModelBuilder::withSetData(int role, QmgSetDataModelDecorator::Handler handler)
+{
+   return embeddNewModel(new QmgRoleBasedSetDataModelDecorator(role, handler, m_parent));
+}
+
 QmgCommonModelBuilder &QmgCommonModelBuilder::withFetchMore(QmgFetchMoreModelDecorator::CanFetchMoreHandler canFetchMoreHandler, QmgFetchMoreModelDecorator::FetchMoreHandler fetchMoreHandler)
 {
    return embeddNewModel(new QmgFetchMoreModelDecorator(canFetchMoreHandler, fetchMoreHandler, m_parent));
