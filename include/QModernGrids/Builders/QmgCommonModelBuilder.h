@@ -17,6 +17,12 @@ class QMODERNGRIDS_LIBRARY_API QmgCommonModelBuilder final
 {
 public:
    QmgCommonModelBuilder(QAbstractItemModel *base, QObject *parent);
+   QmgCommonModelBuilder &operator=(const QmgCommonModelBuilder &other)
+   {
+      m_base = other.m_base;
+      m_parent = other.m_parent;
+      return *this;
+   }
 
    template <class T>
    QmgCommonModelBuilder &withObjectData(std::function<QVariant(int, int, const T &)> handler)
@@ -81,6 +87,6 @@ public:
 private:
    QmgCommonModelBuilder &embeddNewModel(QAbstractProxyModel *model);
 
-   QObject * const m_parent;
+   QObject *m_parent;
    QAbstractItemModel *m_base;
 };
